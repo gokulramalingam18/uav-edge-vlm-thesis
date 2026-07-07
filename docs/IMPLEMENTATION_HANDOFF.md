@@ -4,11 +4,9 @@ _Last updated: July 2026_
 
 ---
 
-## What Was Built
+## System Overview
 
-Fine-tuned Qwen2.5-VL-3B on VisDrone aerial captions using QLoRA (r=8, bf16, 
-1,000 samples, 3 epochs). Deployed on a Jetson Orin NX 16GB via llama.cpp 
-(native build, CUDA SM 8.7) using Q4+imatrix quantization.
+Fine-tuned Qwen2.5-VL-3B on VisDrone aerial captions using QLoRA (r=8, bf16, 1,000 samples, 3 epochs). Deployed on a Jetson Orin NX 16GB via llama.cpp (native build, CUDA SM 8.7) using Q4+imatrix quantization.
 
 ---
 
@@ -32,19 +30,14 @@ Fine-tuned Qwen2.5-VL-3B on VisDrone aerial captions using QLoRA (r=8, bf16,
   locked to the only available CUDA PyTorch wheel; transformers ≥4.49 needs 
   Python ≥3.9
 - Solution: compile llama.cpp natively on Jetson, run as a persistent HTTP server
-- Ollama corrupts fine-tuned Qwen2.5-VL GGUFs  use llama-mtmd-cli directly, 
-  not Ollama
-- Naive Q4/Q8 quantization erases LoRA deltas  use Q4+imatrix only
-- Server mode (load once, keep running) cuts latency from ~32s to ~9s  always 
-  Use a persistent server for benchmarking
+- Ollama corrupts fine-tuned Qwen2.5-VL GGUFs -> use llama-mtmd-cli directly, not Ollama
+- Naive Q4/Q8 quantization erases LoRA deltas -> use Q4+imatrix only
+- Server mode (load once, keep running) cuts latency from ~32s to ~9s -> always use a persistent server for benchmarking
 
 ---
 
-## Known Issues & Gotchas
+## Troubleshooting
 
-- GPU state can corrupt after many hard kills (`pkill -9`), reboot Jetson if 
-  Inference output suddenly degrades
-- imgs 22 & 23 in the demo set fail to parse (model runs out of tokens on very 
-  dense scenes  GT 162 and 101)
-- Quantization on VisDrone images still fails post-reboot in some configurations 
-   root cause not fully confirmed, use Q4+imatrix, which is verified working 
+- GPU state can corrupt after many hard kills (`pkill -9`), reboot Jetson if inference output suddenly degrades
+- imgs 22 & 23 in the demo set fail to parse (model runs out of tokens on very dense scenes -> GT 162 and 101)
+- Quantization on VisDrone images still fails post-reboot in some configurations -> root cause not fully confirmed, use Q4+imatrix, which is verified working 
