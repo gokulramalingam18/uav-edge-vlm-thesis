@@ -1,0 +1,16 @@
+﻿*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+__pycache__/
+*.pyc
+.cache/
+dataset/
+*.mp4
+*.zip
+logs/
+*.err
+*.log
+.DS_Store
+Thumbs.db
