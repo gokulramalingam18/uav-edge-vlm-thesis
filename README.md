@@ -101,7 +101,7 @@ results/              Experiment outputs
   figures/            Plots (Pareto frontier, error distribution)
 
 docs/
-  IMPLEMENTATION_HANDOFF.md  Environment setup, gotchas, resume point
+  IMPLEMENTATION_GUIDE.md  Environment setup, resume point
 ```
 
 ---
@@ -117,7 +117,7 @@ Model weights are not included (too large for GitHub). To reproduce:
 5. Merge + convert: `python scripts/hpc/export_gguf.py`
 6. Calibrate: `sbatch slurm/imatrix.slurm`
 7. Quantize: `sbatch slurm/quantize_imatrix.slurm`
-8. Deploy on Jetson: see `docs/IMPLEMENTATION_HANDOFF.md`
+8. Deploy on Jetson: see `docs/IMPLEMENTATION_GUIDE.md`
 
 ---
 

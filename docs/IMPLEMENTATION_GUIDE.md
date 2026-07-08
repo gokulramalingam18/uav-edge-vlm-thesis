@@ -12,10 +12,10 @@ Fine-tuned Qwen2.5-VL-3B on VisDrone aerial captions using QLoRA (r=8, bf16, 1,0
 
 ## HPC Environment (University of Twente EWI Cluster)
 
-- Head node: `hpc-head1.ewi.utwente.nl`, user `s3335739`, venv `~/uav_env`
+- Head node: `hpc-head1.ewi.utwente.nl`, user `<your_username>`, venv `~/uav_env`
 - Only `main-gpu` partition works for this account; all others reject with "account not permitted"
 - Compute nodes have no internet → always set `HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`, `local_files_only=True`
-- SSL fix required in every job: `export LD_LIBRARY_PATH=/home/s3335739/uav_finetune/libs:$LD_LIBRARY_PATH`
+- SSL fix required in every job: `export LD_LIBRARY_PATH=/home/<your_username>/uav_finetune/libs:$LD_LIBRARY_PATH`
 - Model class: `Qwen2_5_VLForConditionalGeneration` (not `Qwen2VL...`)
 - Always use bfloat16 → float16 produces NaN loss on this model
 
